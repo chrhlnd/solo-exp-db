@@ -1,0 +1,1 @@
+.\Tools\script_pattern.ps1 eqemu "spells_new*"

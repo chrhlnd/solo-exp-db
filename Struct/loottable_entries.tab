@@ -1,0 +1,11 @@
+tab loottable_entries myisam
+	,(dbname eqemu)
+	,(autoinc 10000)
+	,(charset utf8)
+	,(col loottable_id u32 notnull default 0)
+	,(col lootdrop_id u32 notnull default 0)
+	,(col multiplier u32 notnull default 1)
+	,(col droplimit u32 notnull default 0)
+	,(col mindrop u32 notnull default 0)
+	,(col probability f32 notnull default 100)
+	,(primary (asc loottable_id) (asc lootdrop_id))

@@ -1,0 +1,22 @@
+#(
+	mysql data
+		transformation rules
+)#
+
+tab (!cap table !gArg)
+col (!rcap table) (!set cols !gArg)
+dbname (!rcap table) (!set dbname !gArg)
+d (!rcap table) (!cap data !gArgs)
+autoinc (!rcap table) (!set autoinc !gArg)
+
+!emit
+	,(table
+		,'INSERT INTO `' (!get dbname) '`.`' (!get name) '` ( '
+		,'`' (!jclps cols 1 '`,`' $1) '`'
+		,') VALUES ' !eol
+		,(!emit
+			,(data
+				,'(' (!jclps name 1 ',' $1) ')' !eol (!delim ',')))
+		,';' !eol)
+
+

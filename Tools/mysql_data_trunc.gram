@@ -1,0 +1,36 @@
+#(
+	mysql data trunc
+		transformation rules
+)#
+
+tab (!cap table !gArg)
+col (!rcap table) (!set cols !gArg)
+dbname (!rcap table) (!set dbname !gArg)
+d (!rcap table) (!cap data !gArgs)
+autoinc (!rcap table) (!set autoinc !gArg)
+
+!emit
+	,(table
+		,'DELIMITER $$' !eol
+		,'DROP PROCEDURE IF EXISTS `' (!get dbname) '`.`_trunc_' (!get name) '` $$' !eol
+		,'CREATE PROCEDURE `' (!get dbname) '`.`_trunc_' (!get name) '`()' !eol
+		,'proc:BEGIN' !eol
+		,'  IF (SELECT count(*) FROM information_schema.columns WHERE table_schema = "' (!get dbname) '" AND table_name = "' (!get name) '") > 0 THEN'
+		,(!pad +4)
+		,!eol
+		,'TRUNCATE TABLE `' (!get dbname) '`.`' (!get name) '`;' !eol
+		,'ALTER TABLE `' (!get dbname) '`.`' (!get name) '` AUTO_INCREMENT = '
+		,(!if autoinc (!get autoinc))
+		,(!ifn autoinc '1')
+		,';'
+		,(!pad -2) !eol
+		,'END IF;'
+		,(!pad -2) !eol
+		,'END$$' !eol
+		,'DELIMITER ;' !eol
+		,'CALL `' (!get dbname) '`.`_trunc_' (!get name) '` ;' !eol
+		,'DROP PROCEDURE `' (!get dbname) '`.`_trunc_' (!get name) '` ;' !eol !eol)
+		
+		
+
+

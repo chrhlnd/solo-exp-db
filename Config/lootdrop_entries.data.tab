@@ -1,0 +1,12 @@
+tab lootdrop_entries
+	,(dbname eqemu)
+	,(col lootdrop_id)
+	,(col item_id)
+	,(col item_charges)
+	,(col equip_item)
+	,(col chance)
+	,(col disabled_chance)
+	,(col minlevel)
+	,(col maxlevel)
+	,(col multiplier)
+	,(d 4294967295 10399 1 0 4 0 0 127 1)

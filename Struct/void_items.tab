@@ -1,0 +1,8 @@
+tab void_items innodb
+	,(dbname eqemu)
+	,(autoinc 10000)
+	,(charset utf8)
+	,(col id u32 notnull default 0)
+	,(col cnt i32 notnull default 0)
+	,(col updated ts notnull default CURRENT_TIMESTAMP)
+	,(primary (asc id))

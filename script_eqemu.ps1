@@ -1,0 +1,1 @@
+.\Tools\script_all.ps1 eqemu
